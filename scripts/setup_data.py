@@ -3,8 +3,8 @@ import zipfile
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-ZIP = ROOT / "data" / "openvgdb-29.0.sqlite.zip"
-OUT = ROOT / "data" / "openvgdb-29.0.sqlite"
+ZIP = ROOT / "data" / "openvgdb.zip"
+OUT = ROOT / "data" / "openvgdb.sqlite"
 
 def main():
     if OUT.exists():
@@ -14,7 +14,7 @@ def main():
         print(f"[err] missing zip: {ZIP}")
         sys.exit(1)
     with zipfile.ZipFile(ZIP, "r") as zf:
-        # zip 내부 파일명이 다를 수 있으니 첫 항목을 OUT으로 추출
+        # zip 안에 있는 첫 번째 파일을 꺼내서 openvgdb.sqlite로 저장
         names = zf.namelist()
         if not names:
             print("[err] empty zip")
